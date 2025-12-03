@@ -1,5 +1,7 @@
 
-const cardsData =await fetch('https://projeto-meurole.onrender.com/lugares').then(response => response.json());
+
+async function fetchDados(){
+const cardsData = await fetch('https://projeto-meurole.onrender.com/lugares').then(response => response.json());
 
 const container = document.getElementById("cards-container")
 
@@ -7,26 +9,26 @@ cardsData.forEach((card, index) => {
   const cardEl = document.createElement("div");
   cardEl.classList.add("card");
 
-
   cardEl.innerHTML = `
     <div class="carousel" id="carousel-${index}">
-      ${card.imagens.map((img, i) =>
-        `<img src="${img}" class="${i === 0 ? "active" : ""}">`
-      ).join('')}
-
+      <img src="${card.img}" />
       <button class="carousel-btn prev" onclick="changeSlide(${index}, -1)">&#10094;</button>
       <button class="carousel-btn next" onclick="changeSlide(${index}, 1)">&#10095;</button>
+      
     </div>
-
     <div class="card-body">
-      <h4>${card.titulo}</h4>
+      <h4>${card.nome}</h4>
       <p>${card.categoria}</p>
-      <p>${card.telefone}
+      <p>${card.telefone}</p>
     </div>
   `;
 
   container.appendChild(cardEl);
+
 });
+}
+
+
 function changeSlide(cardIndex, direction) {
   const carousel = document.getElementById(`carousel-${cardIndex}`);
   const images = carousel.querySelectorAll("img");
@@ -40,3 +42,5 @@ function changeSlide(cardIndex, direction) {
 
   images[next].classList.add("active");
 }
+
+fetchDados()

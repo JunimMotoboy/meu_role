@@ -1,22 +1,5 @@
 
-const cardsData = [
-  {
-    titulo: "Lugar 1",
-    descricao: "Descrição do lugar 1",
-    imagens: ["imgs/img1.jpg", "imgs/img2.jpg", "imgs/img3.jpg"]
-  },
-  {
-    titulo: "Lugar 2",
-    descricao: "Descrição do lugar 2",
-    imagens: ["imgs/img4.jpg", "imgs/img5.jpg"]
-  },
-  {
-    titulo: "Lugar 3",
-    descricao: "Descrição do lugar 3",
-    imagens: ["imgs/img6.jpg", "imgs/img7.jpg", "imgs/img8.jpg"]
-  }
-];
-
+const cardsData =await fetch('###URL##').then(response => response.json());
 
 const container = document.getElementById("cards-container");
 
@@ -24,7 +7,7 @@ cardsData.forEach((card, index) => {
   const cardEl = document.createElement("div");
   cardEl.classList.add("card");
 
- 
+
   cardEl.innerHTML = `
     <div class="carousel" id="carousel-${index}">
       ${card.imagens.map((img, i) =>
@@ -37,7 +20,8 @@ cardsData.forEach((card, index) => {
 
     <div class="card-body">
       <h4>${card.titulo}</h4>
-      <p>${card.descricao}</p>
+      <p>${card.categoria}</p>
+      <p>${card.telefone}
     </div>
   `;
 

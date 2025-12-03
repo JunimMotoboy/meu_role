@@ -1,7 +1,7 @@
 
-const cardsData =await fetch('###URL##').then(response => response.json());
+const cardsData =await fetch('https://projeto-meurole.onrender.com/lugares').then(response => response.json());
 
-const container = document.getElementById("cards-container");
+const container = document.getElementById("cards-container")
 
 cardsData.forEach((card, index) => {
   const cardEl = document.createElement("div");

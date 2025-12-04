@@ -24,7 +24,13 @@ body {
 }
 
 main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   margin: 0 auto;
+  width: 100%;
+  margin-left: -17px;
 }
 
 .box-hero {

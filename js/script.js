@@ -38,6 +38,8 @@ async function fetchDados() {
         <h2>${card.nome}</h2>
         <p>${card.categoria}</p>
         <img src="${imgUrl}" style="width: 100%; border-radius: 10px" />
+        <p>${"Endereço: " + card.endereco}</p>
+        <p>${card.descricao}</p>
       </div>
     `;
 
@@ -46,6 +48,7 @@ async function fetchDados() {
 
   
   ativarEventosModal();
+  
 }
 
 
@@ -99,3 +102,5 @@ window.addEventListener("click", (e) => {
     modal.style.display = "none";
   }
 });
+
+

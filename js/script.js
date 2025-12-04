@@ -11,10 +11,10 @@ cardsData.forEach((card, index) => {
 
   cardEl.innerHTML = `
     <div class="carousel" id="carousel-${index}">
-      <img src="${card.img}" />
+      <img src="/uploads/${card.img}" />
       <button class="carousel-btn prev" onclick="changeSlide(${index}, -1)">&#10094;</button>
       <button class="carousel-btn next" onclick="changeSlide(${index}, 1)">&#10095;</button>
-      
+
     </div>
     <div class="card-body">
       <h4>${card.nome}</h4>

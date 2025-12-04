@@ -17,16 +17,10 @@ async function fetchDados() {
 
     cardEl.innerHTML = `
     <div class="carousel" id="carousel-${index}">
-<<<<<<< HEAD
       <img src="/uploads/${card.img}" />
       <button class="carousel-btn prev" onclick="changeSlide(${index}, -1)">&#10094;</button>
       <button class="carousel-btn next" onclick="changeSlide(${index}, 1)">&#10095;</button>
 
-=======
-      <img src="${imgUrl}" />
-      <button class="carousel-btn prev" onclick="changeSlide(${index}, -1)">&#10094;</button>
-      <button class="carousel-btn next" onclick="changeSlide(${index}, 1)">&#10095;</button>
->>>>>>> 07b305d9ab3fd6c920667240daef223b5eaa6281
     </div>
     <div class="card-body">
       <h4>${card.nome}</h4>

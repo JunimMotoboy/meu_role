@@ -53,7 +53,7 @@ function renderizarCards(lista) {
         <h2>${card.nome}</h2>
         <p>${card.categoria}</p>
         <img src="${imgUrl}" style="width: 100%; border-radius: 10px" />
-        <p class="adress">Endereço: ${card.endereco}</p>
+        <a href="https://www.google.com.br/maps/place/${card.endereco}" target="_blank"><p class="adress">Endereço: ${card.endereco}</p></a>
         <p>${card.descricao}</p>
       </div>
     `;

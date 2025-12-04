@@ -13,17 +13,12 @@ async function fetchDados() {
 
     const cardEl = document.createElement("div");
     cardEl.classList.add("card");
-
-
-
-
-    
     console.log(imgUrl)
     
 
     cardEl.innerHTML = `
     <div class="carousel" id="carousel-${index}">
-      <img src="/uploads/${card.img}" />
+      <img src="${imgUrl}" />
       <button class="carousel-btn prev" onclick="changeSlide(${index}, -1)">&#10094;</button>
       <button class="carousel-btn next" onclick="changeSlide(${index}, 1)">&#10095;</button>
 
@@ -31,7 +26,6 @@ async function fetchDados() {
     <div class="card-body">
       <h4>${card.nome}</h4>
       <p>${card.categoria}</p>
-      <p>${card.telefone}</p>
     </div>
   `;
 

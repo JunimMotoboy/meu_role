@@ -13,7 +13,13 @@ async function fetchDados() {
 
     const cardEl = document.createElement("div");
     cardEl.classList.add("card");
+
+
+
+
+    
     console.log(imgUrl)
+    
 
     cardEl.innerHTML = `
     <div class="carousel" id="carousel-${index}">

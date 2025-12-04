@@ -1,20 +1,32 @@
 
 
-async function fetchDados(){
-const cardsData = await fetch('https://projeto-meurole.onrender.com/lugares').then(response => response.json());
+async function fetchDados() {
+  const cardsData = await fetch('https://projeto-meurole.onrender.com/lugares').then(response => response.json());
 
-const container = document.getElementById("cards-container")
 
-cardsData.forEach((card, index) => {
-  const cardEl = document.createElement("div");
-  cardEl.classList.add("card");
 
-  cardEl.innerHTML = `
+  const container = document.getElementById("cards-container")
+
+
+  cardsData.forEach((card, index) => {
+    const imgUrl = `https://projeto-meurole.onrender.com/uploads/${card.img}`;
+
+    const cardEl = document.createElement("div");
+    cardEl.classList.add("card");
+    console.log(imgUrl)
+
+    cardEl.innerHTML = `
     <div class="carousel" id="carousel-${index}">
+<<<<<<< HEAD
       <img src="/uploads/${card.img}" />
       <button class="carousel-btn prev" onclick="changeSlide(${index}, -1)">&#10094;</button>
       <button class="carousel-btn next" onclick="changeSlide(${index}, 1)">&#10095;</button>
 
+=======
+      <img src="${imgUrl}" />
+      <button class="carousel-btn prev" onclick="changeSlide(${index}, -1)">&#10094;</button>
+      <button class="carousel-btn next" onclick="changeSlide(${index}, 1)">&#10095;</button>
+>>>>>>> 07b305d9ab3fd6c920667240daef223b5eaa6281
     </div>
     <div class="card-body">
       <h4>${card.nome}</h4>
@@ -23,9 +35,9 @@ cardsData.forEach((card, index) => {
     </div>
   `;
 
-  container.appendChild(cardEl);
+    container.appendChild(cardEl);
 
-});
+  });
 }
 
 

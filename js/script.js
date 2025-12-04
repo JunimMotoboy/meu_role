@@ -1,52 +1,101 @@
 
-
 async function fetchDados() {
-  const cardsData = await fetch('https://projeto-meurole.onrender.com/lugares').then(response => response.json());
+  const cardsData = await fetch('https://projeto-meurole.onrender.com/lugares')
+      .then(response => response.json());
 
-
-
-  const container = document.getElementById("cards-container")
-
+  const container = document.getElementById("cards-container");
 
   cardsData.forEach((card, index) => {
     const imgUrl = `https://projeto-meurole.onrender.com/uploads/${card.img}`;
 
     const cardEl = document.createElement("div");
     cardEl.classList.add("card");
-    console.log(imgUrl)
-    
 
     cardEl.innerHTML = `
-    <div class="carousel" id="carousel-${index}">
-      <img src="${imgUrl}" />
-      <button class="carousel-btn prev" onclick="changeSlide(${index}, -1)">&#10094;</button>
-      <button class="carousel-btn next" onclick="changeSlide(${index}, 1)">&#10095;</button>
+      <div class="carousel" id="carousel-${index}">
+        <img src="${imgUrl}" class="active" />
+        <button class="carousel-btn prev" onclick="changeSlide(${index}, -1)">&#10094;</button>
+        <button class="carousel-btn next" onclick="changeSlide(${index}, 1)">&#10095;</button>
+      </div>
 
-    </div>
-    <div class="card-body">
-      <h4>${card.nome}</h4>
-      <p>${card.categoria}</p>
-    </div>
-  `;
+      <div class="card-body">
+        <h4>${card.nome}</h4>
+        <p>${card.categoria}</p>
+        <button class="btn-open-modal" data-index="${index}">Ver mais</button>
+      </div>
+    `;
 
     container.appendChild(cardEl);
 
+   
+    const modal = document.createElement("div");
+    modal.classList.add("modal");
+    modal.id = `modal-${index}`;
+
+    modal.innerHTML = `
+      <div class="modal-content">
+        <span class="close" data-index="${index}">&times;</span>
+        <h2>${card.nome}</h2>
+        <p>${card.categoria}</p>
+        <img src="${imgUrl}" style="width: 100%; border-radius: 10px" />
+      </div>
+    `;
+
+    document.body.appendChild(modal);
+  });
+
+  
+  ativarEventosModal();
+}
+
+
+function ativarEventosModal() {
+  const openBtns = document.querySelectorAll(".btn-open-modal");
+  const closeBtns = document.querySelectorAll(".close");
+
+  openBtns.forEach(btn => {
+    btn.addEventListener("click", () => {
+      const i = btn.getAttribute("data-index");
+      document.getElementById(`modal-${i}`).style.display = "flex";
+    });
+  });
+
+  closeBtns.forEach(btn => {
+    btn.addEventListener("click", () => {
+      const i = btn.getAttribute("data-index");
+      document.getElementById(`modal-${i}`).style.display = "none";
+    });
+  });
+
+  window.addEventListener("click", e => {
+    document.querySelectorAll(".modal").forEach(modal => {
+      if (e.target === modal) {
+        modal.style.display = "none";
+      }
+    });
   });
 }
 
+fetchDados();
 
-function changeSlide(cardIndex, direction) {
-  const carousel = document.getElementById(`carousel-${cardIndex}`);
-  const images = carousel.querySelectorAll("img");
 
-  let current = [...images].findIndex(img => img.classList.contains("active"));
-  images[current].classList.remove("active");
+// Script modal
+const modal = document.getElementById("myModal");
+const openModalBtn = document.getElementById("openModalBtn");
+const closeBtn = document.querySelector(".close");
 
-  let next = current + direction;
-  if (next < 0) next = images.length - 1;
-  if (next >= images.length) next = 0;
 
-  images[next].classList.add("active");
-}
+openModalBtn.addEventListener("click", () => {
+  modal.style.display = "flex";
+});
 
-fetchDados()
+
+closeBtn.addEventListener("click", () => {
+  modal.style.display = "none";
+});
+
+window.addEventListener("click", (e) => {
+  if (e.target === modal) {
+    modal.style.display = "none";
+  }
+});

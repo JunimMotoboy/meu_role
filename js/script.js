@@ -1,20 +1,20 @@
 
 
-async function fetchDados(){
-const cardsData = await fetch('https://projeto-meurole.onrender.com/lugares').then(response => response.json());
+async function fetchDados() {
+  const cardsData = await fetch('https://projeto-meurole.onrender.com/lugares').then(response => response.json());
 
-const container = document.getElementById("cards-container")
+  const container = document.getElementById("cards-container")
 
-cardsData.forEach((card, index) => {
-  const cardEl = document.createElement("div");
-  cardEl.classList.add("card");
+  cardsData.forEach((card, index) => {
+    const cardEl = document.createElement("div");
+    cardEl.classList.add("card");
+    console.log(card.img)
 
-  cardEl.innerHTML = `
+    cardEl.innerHTML = `
     <div class="carousel" id="carousel-${index}">
       <img src="${card.img}" />
       <button class="carousel-btn prev" onclick="changeSlide(${index}, -1)">&#10094;</button>
       <button class="carousel-btn next" onclick="changeSlide(${index}, 1)">&#10095;</button>
-      
     </div>
     <div class="card-body">
       <h4>${card.nome}</h4>
@@ -23,9 +23,9 @@ cardsData.forEach((card, index) => {
     </div>
   `;
 
-  container.appendChild(cardEl);
+    container.appendChild(cardEl);
 
-});
+  });
 }
 
 

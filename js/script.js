@@ -30,8 +30,6 @@ function renderizarCards(lista) {
     cardEl.innerHTML = `
       <div class="carousel" id="carousel-${index}">
         <img src="${imgUrl}" class="active" />
-        <button class="carousel-btn prev" onclick="changeSlide(${index}, -1)">&#10094;</button>
-        <button class="carousel-btn next" onclick="changeSlide(${index}, 1)">&#10095;</button>
       </div>
 
       <div class="card-body">

@@ -3,16 +3,21 @@
 async function fetchDados() {
   const cardsData = await fetch('https://projeto-meurole.onrender.com/lugares').then(response => response.json());
 
+
+
   const container = document.getElementById("cards-container")
 
+
   cardsData.forEach((card, index) => {
+    const imgUrl = `https://projeto-meurole.onrender.com/uploads/${card.img}`;
+
     const cardEl = document.createElement("div");
     cardEl.classList.add("card");
-    console.log(card.img)
+    console.log(imgUrl)
 
     cardEl.innerHTML = `
     <div class="carousel" id="carousel-${index}">
-      <img src="${card.img}" />
+      <img src="${imgUrl}" />
       <button class="carousel-btn prev" onclick="changeSlide(${index}, -1)">&#10094;</button>
       <button class="carousel-btn next" onclick="changeSlide(${index}, 1)">&#10095;</button>
     </div>

@@ -1,4 +1,6 @@
 let todosOsLugares = [];
+let quantidadeVisivel = 6; 
+
 
 
 
@@ -14,14 +16,16 @@ async function fetchDados() {
 
 
 
-
 function renderizarCards(lista) {
   const container = document.getElementById("cards-container");
   container.innerHTML = ""; 
 
   document.querySelectorAll(".modal").forEach(m => m.remove()); 
 
-  lista.forEach((card, index) => {
+ 
+  const listaLimitada = lista.slice(0, quantidadeVisivel);
+
+  listaLimitada.forEach((card, index) => {
     const imgUrl = `https://projeto-meurole.onrender.com/uploads/${card.img}`;
 
     const cardEl = document.createElement("div");
@@ -41,8 +45,6 @@ function renderizarCards(lista) {
 
     container.appendChild(cardEl);
 
-
- 
     const modal = document.createElement("div");
     modal.classList.add("modal");
     modal.id = `modal-${index}`;
@@ -53,13 +55,17 @@ function renderizarCards(lista) {
         <h2>${card.nome}</h2>
         <p>${card.categoria}</p>
         <img src="${imgUrl}" style="width: 100%; border-radius: 10px" />
-        <a href="https://www.google.com.br/maps/place/${card.endereco}" target="_blank"><p class="adress">Endereço: ${card.endereco}</p></a>
+        <a href="https://www.google.com.br/maps/place/${card.endereco}" target="_blank">
+          <p class="adress">Endereço: ${card.endereco}</p>
+        </a>
         <p>${card.descricao}</p>
       </div>
     `;
 
     document.body.appendChild(modal);
   });
+
+  atualizarBotaoVerMais(lista);
 }
 
 
@@ -96,6 +102,8 @@ function ativarEventosModal() {
 function filtrar() {
   const texto = document.querySelector(".share").value.trim().toLowerCase();
 
+  quantidadeVisivel = 6; 
+
   if (texto === "") {
     renderizarCards(todosOsLugares);
     ativarEventosModal();
@@ -120,7 +128,10 @@ function filtrar() {
 
 
 
+
 function filtrarLugares(categoria) {
+
+  quantidadeVisivel = 6; 
 
   if (categoria === "todos") {
     renderizarCards(todosOsLugares);
@@ -135,11 +146,34 @@ function filtrarLugares(categoria) {
   renderizarCards(filtrados);
   ativarEventosModal();
 }
+
+
+
 document.querySelector(".share").addEventListener("keydown", function (event) {
   if (event.key === "Enter") {
     filtrar(); 
   }
 });
+
+
+
+
+document.getElementById("btn-ver-mais").addEventListener("click", () => {
+  quantidadeVisivel += 6; 
+  renderizarCards(todosOsLugares);
+  ativarEventosModal();
+});
+
+function atualizarBotaoVerMais(lista) {
+  const btnContainer = document.getElementById("ver-mais-container");
+
+  if (quantidadeVisivel >= lista.length) {
+    btnContainer.style.display = "none";
+  } else {
+    btnContainer.style.display = "block";
+  }
+}
+
 
 
 

@@ -30,7 +30,6 @@ main {
   justify-content: center;
   margin: 0 auto;
   width: 100%;
-  margin-left: -17px;
 }
 
 .box-hero {
@@ -207,7 +206,7 @@ main {
   width: 100%;
 }
 .cards-container {
-  padding: 30px;
+
   display: flex;
   justify-content: center;
   gap: 20px;

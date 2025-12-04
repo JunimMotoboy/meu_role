@@ -1,11 +1,27 @@
+let todosOsLugares = [];
+
+
 
 async function fetchDados() {
   const cardsData = await fetch('https://projeto-meurole.onrender.com/lugares')
       .then(response => response.json());
 
-  const container = document.getElementById("cards-container");
+  todosOsLugares = cardsData;
 
-  cardsData.forEach((card, index) => {
+  renderizarCards(cardsData); 
+  ativarEventosModal();       
+}
+
+
+
+
+function renderizarCards(lista) {
+  const container = document.getElementById("cards-container");
+  container.innerHTML = ""; 
+
+  document.querySelectorAll(".modal").forEach(m => m.remove()); 
+
+  lista.forEach((card, index) => {
     const imgUrl = `https://projeto-meurole.onrender.com/uploads/${card.img}`;
 
     const cardEl = document.createElement("div");
@@ -27,7 +43,8 @@ async function fetchDados() {
 
     container.appendChild(cardEl);
 
-   
+
+ 
     const modal = document.createElement("div");
     modal.classList.add("modal");
     modal.id = `modal-${index}`;
@@ -38,18 +55,16 @@ async function fetchDados() {
         <h2>${card.nome}</h2>
         <p>${card.categoria}</p>
         <img src="${imgUrl}" style="width: 100%; border-radius: 10px" />
-        <p>${"Endereço: " + card.endereco}</p>
+        <p class="adress">Endereço: ${card.endereco}</p>
         <p>${card.descricao}</p>
       </div>
     `;
 
     document.body.appendChild(modal);
   });
-
-  
-  ativarEventosModal();
-  
 }
+
+
 
 
 function ativarEventosModal() {
@@ -72,35 +87,62 @@ function ativarEventosModal() {
 
   window.addEventListener("click", e => {
     document.querySelectorAll(".modal").forEach(modal => {
-      if (e.target === modal) {
-        modal.style.display = "none";
-      }
+      if (e.target === modal) modal.style.display = "none";
     });
   });
 }
 
-fetchDados();
 
 
-// Script modal
-const modal = document.getElementById("myModal");
-const openModalBtn = document.getElementById("openModalBtn");
-const closeBtn = document.querySelector(".close");
+
+function filtrar() {
+  const texto = document.querySelector(".share").value.trim().toLowerCase();
+
+  if (texto === "") {
+    renderizarCards(todosOsLugares);
+    ativarEventosModal();
+    return;
+  }
+
+  const filtrados = todosOsLugares.filter(lugar => {
+    const nome = lugar.nome.toLowerCase();
+    const categoria = lugar.categoria.toLowerCase();
+    const endereco = lugar.endereco.toLowerCase();
+
+    return (
+      nome.includes(texto) ||
+      categoria.includes(texto) ||
+      endereco.includes(texto)
+    );
+  });
+
+  renderizarCards(filtrados);
+  ativarEventosModal();
+}
 
 
-openModalBtn.addEventListener("click", () => {
-  modal.style.display = "flex";
-});
 
+function filtrarLugares(categoria) {
 
-closeBtn.addEventListener("click", () => {
-  modal.style.display = "none";
-});
+  if (categoria === "todos") {
+    renderizarCards(todosOsLugares);
+    ativarEventosModal();
+    return;
+  }
 
-window.addEventListener("click", (e) => {
-  if (e.target === modal) {
-    modal.style.display = "none";
+  const filtrados = todosOsLugares.filter(lugar =>
+    lugar.categoria.toLowerCase() === categoria.toLowerCase()
+  );
+
+  renderizarCards(filtrados);
+  ativarEventosModal();
+}
+document.querySelector(".share").addEventListener("keydown", function (event) {
+  if (event.key === "Enter") {
+    filtrar(); 
   }
 });
 
 
+
+fetchDados();

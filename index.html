@@ -1,43 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Localiza Patos</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="css/styles.css" />
-  </head>
-  <body>
-    <div class="container">
-      <div class="box-hero">
-        <h1>Localiza Patos</h1>
-        </div>
-        <div class="box-share">
-          <input type="text" class="share" placeholder="Pesquise aqui" />
-          <span><img src="img/lupa.png" class="icon"  alt="lupa de pesquisa"  onclick="filtrar()" /></span>
-        </div>
-      <main>
-        <div class="cards-container" id="cards-container"></div>
-        <div id="ver-mais-container" style="text-align:center; margin: 30px 0;">
-  <button id="btn-ver-mais" style="
-    padding: 10px 20px;
-    background: black;
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-  ">Ver mais</button>
-</div>
+<html lang="pt-BR">
 
-      </main>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Localiza Patos</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+
+<body>
+  <div class="container">
+    <div class="box-hero">
+      <h1>Localiza Patos</h1>
     </div>
-    <script src="js/script.js"></script>
 
-   
-  </body>
+    <div class="box-share">
+      <input type="text" class="share" placeholder="Buscar locais, categorias e endereços..." />
+      <img src="img/lupa.png" class="icon" alt="buscar" />
+    </div>
+
+
+    <div id="skeleton-container" class="cards-container"></div>
+
+    <main>
+      <div class="cards-container" id="cards-container"></div>
+
+      <div id="ver-mais-container" style="text-align:center; margin: 30px 0;">
+        <button id="btn-ver-mais" class="button-85">Ver mais</button>
+        <button id="btn-ver-menos" style="display:none;" class="button-85">Ver menos</button>
+      </div>
+    </main>
+  </div>
+
+  <footer class="site-footer">
+    Criado por Daniel Maori, Vitor e Flavio
+  </footer>
+
+
+  <button id="toggle-theme" aria-label="Alternar tema">🌙</button>
+
+  <script src="js/script.js"></script>
+</body>
+
 </html>
-
-
